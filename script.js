@@ -97,6 +97,35 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.top = `${randomY}px`;
 });
 
+noBtn.addEventListener("click", () => {
+    moveNoButton();  // Bewegt den "No"-Button sofort beim Klick
+  
+    // Du kannst hier auch andere Funktionen hinzufügen, die beim Klick auf den Button passieren sollen.
+  });
+  
+  // Die Funktion, die den "No"-Button bei jedem Klick bewegt
+  function moveNoButton() {
+      const wrapper = document.querySelector(".wrapper");
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const noBtnRect = noBtn.getBoundingClientRect();
+  
+      const maxX = wrapperRect.width - noBtnRect.width;
+      const maxY = wrapperRect.height - noBtnRect.height;
+  
+      let randomX, randomY;
+      do {
+          randomX = Math.min(Math.floor(Math.random() * maxX), maxX);
+          randomY = Math.min(Math.floor(Math.random() * maxY), maxY);
+      } while (
+          Math.abs(randomX - noBtn.offsetLeft) < 50 || 
+          Math.abs(randomY - noBtn.offsetTop) < 50
+      );
+  
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+  }
+  
+
 // Funktion für den Ghost-Effekt (Spur)
 function createGhost(button) {
     const ghost = document.createElement("div");
