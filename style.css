@@ -1,0 +1,228 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+    color: #333;
+}
+
+@keyframes hearts {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+}
+
+@keyframes gift {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+}
+
+.heart, .gift {
+    position: absolute;
+    font-size: 24px;
+    animation: hearts 1.2s ease-out;
+    pointer-events: none;
+}
+
+.ghost {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 50px;
+    background-color: rgba(255, 77, 77, 0.5); /* Durchsichtiger roter Button */
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
+}
+
+#music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+#music-btn:hover {
+    background-color: #e43e3e;
+}
+
+.wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    background: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.question {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.gif {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:focus {
+    outline: none;
+}
+
+.yes-btn {
+    background-color: #4caf50;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.yes-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.no-btn {
+    position: absolute;
+    background-color: #ff4d4d;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: top 0.2s ease-out, left 0.2s ease-out;
+}
+
+.no-btn:hover {
+    background-color: #e43e3e;
+    transform: scale(1.05);
+}
+
+/* Gift-Button mit class */
+.gift-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: none; /* Button zunächst unsichtbar */
+}
+
+.gift-btn:hover {
+    background-color: #e43e3e;
+}
+
+#choose-gift-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+#secret-gif {
+    padding-left: 3vh;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Breite des Bildschirms */
+    height: 30vh; /* Höhe des Bildschirms */
+    z-index: 9999; /* Damit das GIF über allen anderen Elementen liegt */
+    display: none; /* Standardmäßig ausgeblendet */
+}
+
+
+/* Popup Container - bedeckt die ganze Seite */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Hintergrund abdunkeln */
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Popup Inhalt - Perfekt mittig ausgerichtet */
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    
+    /* WICHTIG: Zentrierung */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+
+  
+.gift-option {
+    margin-top: 10px;
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #ff7f7f;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gift-option:hover {
+    background-color: #e67373;
+}
+
+.gift-options button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin: 5px;
+}
+
+.gift-options button:hover {
+    background-color: #e43e3e;
+}

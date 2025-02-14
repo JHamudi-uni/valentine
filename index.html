@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random No Button</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="wrapper">
+  <h2 class="question">will you be my valentine? 🥺</h2>
+  <img class="gif" alt="gif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjJvdWZzYXc1NGJ6aGp1cDE3b2dyNnVzOGN1andkMjVrMmRzeGwwZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3OhXBaoR1tVPW/giphy.gif" />
+  <div class="btn-group">
+    <button class="yes-btn">Yes</button>
+    <button class="no-btn">No</button>
+    <button class="gift-btn" style="display: none;">Geschenk</button>
+  </div>
+
+  <div id="choose-gift-text" style="display: none;">
+    <h3>Wähl dein Geschenk aus</h3>
+  </div>
+
+  <!-- Geschenk-Optionen -->
+  <div id="gift-options" class="gift-options" style="display: none;">
+    <button id="chocolate">🍫 Schokolade</button>
+    <button id="flowers">💐 Blumen</button>
+    <button id="ice-cream">🍦 Ice Cream</button>
+    <button id="teddy">🧸 Teddy Bär</button>
+  </div>
+
+  <!-- Secret Gift Button (Jetzt mittig ausgerichtet) -->
+  <button class="secret-gift-btn" style="display: none;">🔒 Geheimes Geschenk</button>
+
+  <br><br>
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button id="music-btn">🎵 Musik abspielen</button>
+</div>
+
+<!-- Secret Gift Popup (Styling verbessert) -->
+<div id="secret-popup" class="popup" style="display: none;">
+  <div class="popup-content">
+    <span class="close-btn">&times;</span>
+    <h3>Beantworte die Fragen um das geheime Geschenk freizuschalten!</h3>
+    <div class="popup-form">
+      <label>Minas Lieblingsfarbe? 🎨</label>
+      <input type="text" id="q1">
+      
+      <label>Minas Lieblingsessen? 🍕</label>
+      <input type="text" id="q2">
+      
+      <label>Minas Lieblings-Superkraft? 🔥</label>
+      <input type="text" id="q3">
+      
+      <button id="submit-answers">Submit</button>
+      <p id="error-message" style="color: red; display: none;">Falsche Antwort! Versuchs nochmal.</p>
+      
+      <img id="secret-gif" src="" style="display: none; width: 100%; max-width: 300px;">
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+<style>
+  /* Secret Gift Button mittig ausrichten */
+  .secret-gift-btn {
+    display: none;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #ff6b81;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+  }
+
+  /* Popup Styling verbessern */
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Gleichmäßiges Padding für das Formular */
+  .popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    padding: 10px 20px;
+  }
+
+  .popup-form label {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .popup-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .popup-form button {
+    margin-top: 10px;
+    background-color: #ff6b81;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const giftBtn = document.querySelector(".gift-btn");
+    const secretGiftBtn = document.querySelector(".secret-gift-btn");
+    const secretPopup = document.getElementById("secret-popup");
+    const closeBtn = document.querySelector(".close-btn");
+    const submitAnswers = document.getElementById("submit-answers");
+    const errorMessage = document.getElementById("error-message");
+    const secretGif = document.getElementById("secret-gif");
+    
+    // Secret Gift Button erst nach Klick auf Gift-Button anzeigen
+    giftBtn.addEventListener("click", function() {
+      secretGiftBtn.style.display = "block";
+    });
+
+    // Secret Gift Button öffnet Popup
+    secretGiftBtn.addEventListener("click", function() {
+      secretPopup.style.display = "block";
+    });
+
+    // Popup schließen
+    closeBtn.addEventListener("click", function() {
+      secretPopup.style.display = "none";
+    });
+
+    // Antworten überprüfen
+    submitAnswers.addEventListener("click", function() {
+    const answer1 = document.getElementById("q1").value.trim().toLowerCase();
+    const answer2 = document.getElementById("q2").value.trim().toLowerCase();
+    const answer3 = document.getElementById("q3").value.trim().toLowerCase();
+    
+    if ((answer1 === "schwarz" || answer1 === "weinrot") && answer2 === "cigköfte" && answer3 === "es gibt keine superkräfte") { 
+        secretGif.src = "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGJ2N2k1Z3cybXk0N2xsMmcxaTR1amlucnh3ajhsa3E0ODZsMGtvbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/35NGT2lm6mfHlNAkMu/giphy.gif";
+        secretGif.style.display = "block"; // Zeigt das GIF an
+        errorMessage.style.display = "none";
+    } else {
+        errorMessage.style.display = "block";
+        secretGif.style.display = "none";
+    }
+});
+
+  });
+</script>
+</body>
+</html>
